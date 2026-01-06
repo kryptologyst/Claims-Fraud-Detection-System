@@ -1,0 +1,62 @@
+# Configuration for Claims Fraud Detection System
+defaults:
+  - _self_
+  - data: synthetic
+  - model: xgboost
+  - evaluation: fraud_metrics
+
+# Project settings
+project:
+  name: "claims_fraud_detection"
+  version: "1.0.0"
+  description: "Insurance Claims Fraud Detection System"
+
+# Data settings
+data:
+  n_samples: 10000
+  fraud_rate: 0.15
+  test_size: 0.2
+  val_size: 0.1
+  random_seed: 42
+
+# Feature engineering
+features:
+  categorical_encoding: "target"
+  scaling: "standard"
+  feature_selection: true
+  n_features_select: 10
+
+# Model settings
+model:
+  name: "xgboost"
+  params:
+    n_estimators: 100
+    max_depth: 6
+    learning_rate: 0.1
+    subsample: 0.8
+    colsample_bytree: 0.8
+    random_state: 42
+
+# Evaluation settings
+evaluation:
+  metrics:
+    - "auc"
+    - "precision_at_k"
+    - "recall_at_k"
+    - "f1"
+    - "precision"
+    - "recall"
+  k_values: [10, 50, 100]
+  cv_folds: 5
+
+# Paths
+paths:
+  data_dir: "data"
+  models_dir: "models"
+  assets_dir: "assets"
+  logs_dir: "logs"
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

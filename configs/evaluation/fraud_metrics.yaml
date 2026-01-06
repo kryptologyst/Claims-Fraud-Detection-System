@@ -1,0 +1,32 @@
+# Fraud detection evaluation metrics
+_target_: src.evaluation.fraud_metrics.FraudDetectionEvaluator
+
+metrics:
+  - "auc"
+  - "precision_at_k"
+  - "recall_at_k"
+  - "f1"
+  - "precision"
+  - "recall"
+  - "specificity"
+  - "balanced_accuracy"
+
+# Precision@K and Recall@K settings
+k_values: [10, 50, 100, 200]
+
+# Threshold optimization
+threshold_optimization:
+  method: "youden"  # "youden", "f1", "precision_recall"
+  cv_folds: 5
+
+# Calibration
+calibration:
+  enabled: true
+  method: "isotonic"  # "isotonic", "sigmoid"
+
+# Cost-benefit analysis
+cost_benefit:
+  enabled: true
+  investigation_cost: 100  # Cost to investigate a claim
+  fraud_loss: 5000  # Average loss from undetected fraud
+  false_positive_cost: 50  # Cost of false positive (customer dissatisfaction)

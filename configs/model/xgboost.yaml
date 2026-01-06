@@ -1,0 +1,23 @@
+# XGBoost model configuration
+_target_: src.models.xgboost_model.XGBoostFraudDetector
+
+params:
+  n_estimators: 100
+  max_depth: 6
+  learning_rate: 0.1
+  subsample: 0.8
+  colsample_bytree: 0.8
+  random_state: 42
+  eval_metric: "auc"
+  early_stopping_rounds: 10
+
+# Training settings
+training:
+  validation_split: 0.2
+  early_stopping: true
+  verbose: true
+
+# Feature importance
+feature_importance:
+  plot_top_n: 15
+  save_plot: true
